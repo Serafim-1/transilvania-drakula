@@ -1,0 +1,59 @@
+ - имя: Setup Node.js среда 
+ использует: actions/setup-node@v4.0.0
+ с помощью:
+ # Установить always-auth в npmrc.
+ always-auth: # необязательно, по умолчанию равно false
+ # Спецификация используемой версии. Примеры: 12.x, 10.15.1, >=10.15.0.
+ версия узла: # необязательно
+ # Файл, содержащий спецификацию используемой версии. Примеры: .nvmrc, .node-version, .tool-versions.
+ файл node-version: # необязательно
+ # Целевая архитектура для использования Node. Примеры: x86, x64. По умолчанию будет использоваться архитектура системы.
+ архитектура: # необязательно
+ # Установите этот параметр, если вы хотите, чтобы действие проверяло наличие последней доступной версии, удовлетворяющей спецификации версии.
+ проверка-последняя: # необязательно
+ # Необязательный реестр для настройки авторизации. Установит реестр на уровне проекта .npmrc и .файл yarnrc и настройте auth для чтения из env.NODE_AUTH_TOKEN.
+ url реестра: # необязательно
+ # Необязательная область для проверки подлинности в реестрах с ограниченной областью действия. Будет возвращен владельцу репозитория при использовании реестра пакетов GitHub (https://npm.pkg.github.com /).
+ область действия: # необязательно
+ # Используется для извлечения дистрибутивов узлов из версий узлов. Поскольку существует значение по умолчанию, оно обычно не предоставляется пользователем. При выполнении этого действия на github.com достаточно значения по умолчанию. При работе на GHES вы можете передать личный токен доступа для github.com, если у вас ограничено скорость.
+ токен: # необязательно, значение по умолчанию равно ${{ github.server_url == 'https://github.com' && github.token || " }}
+ # Используется для указания менеджера пакетов для кэширования в каталоге по умолчанию. Поддерживаемые значения: npm, yarn, pnpm.
+ кэш: # необязательно
+ # Используется для указания пути к файлу зависимости: package-lock.json, yarn.lock и т.д. Поддерживает подстановочные знаки или список имен файлов для кэширования нескольких зависимостей.
+ cache-dependency-path: # необязательно
+ # This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
